@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    #name-input, #age-input, #address-input, #create-name {
+        width: 300px;
+    }
+
+    #createbutton{
+        background-color: green;
+        color: white;
+    }
+
+    #createsearch{
+        background-color:aqua;
+        color: rgb(121, 110, 110);
+
+    }
+
+    table{
+        
+        margin:  0 auto;
+        margin-top: 20px;
+        width: 80%;
+        margin-left: 0;
+
+    }
+    tr, td {
+        margin: 150px;
+    }
+    td{
+        padding: 5px;
+        text-align: center;
+    }
+
+    .edit-button{
+        background-color: blue;
+        color: white;
+    }
+
+    .delete-button{
+        background-color: red;
+        color: white;
+    }
+</style>
+<body id=" body">
+    <label for="name-input">Name</label>
+    <br>
+    <input type="text" id="name-input" placeholder="Please fill to create new Student" >
+
+    <br>
+
+    <label for="age-input">Age</label>
+    <br>
+    <input type="number" id="age-input" placeholder="Please fill to create new Student" >
+
+    <br>
+
+    <label for="address-input">Address</label>
+    <br>
+    <input type="text" id="address-input" placeholder="Please fill to create new Student" >
+    <br>
+
+    <button id="createbutton" onclick="createStudent()"> Create Student</button>     
+    <br> 
+
+    <input type="text" id="create-name" placeholder="Please enter the name student to search" >
+    <button oninput="searchListStudent()" id="createsearch"> Search</button>
+
+    <br>
+
+    <table border =1px id="table">
+        <thead>
+            <th>STT</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Address</th>
+            <th>Edit</th>
+            <th>Delete</th>
+    
+        </thead>
+
+        <tbody id="body">
+
+
+        </tbody>
+
+    <script>
+
+   
+    let listUser=[];
+    
+    function createStudent(){
+
+        let name= document.getElementById("name-input").value;
+        if (name.value=="") {alert ("The name is required! Please try again!")} else {
+        listUser.push(name);
+        document.getElementById("name-input").value=""; }
+        
+
+        let age= document.getElementById("age-input").value;
+        if (age.value=="") {alert ("The age is required! Please try again!")} else {
+        listUser.push(age);
+        document.getElementById("age-input").value=""; }
+       
+        
+        let address= document.getElementById("address-input").value;
+        if (address.value=="") {alert ("The address is required! Please try again!")} else {
+        listUser.push(address);
+        document.getElementById("address-input").value=""; }
+        
+        renderListUser();   
+       
+       
+    }
+
+    
+    function renderListUser(){
+        let data = "";
+        for (let i = 0; i < listUser.length; i ++) {
+            let name= listUser[i]
+            let age= listUser[i]
+            let address= listUser[i]
+            
+            data += 
+            `
+            <tr>
+                <td>  ${i+1} </td>
+                <td> ${name} </td>
+                <td> ${age} </td>
+                <td> ${address} </td>
+                <td> <button onclick=editUser(${i})> Edit</button> </td>
+                <td> <button onclick=deleteUser(${i})>Delete</button> </td>
+            
+            </tr>
+            `
+        }
+        document.getElementById("body").innerHTML=data;
+    }
+  
+
+   
+function deleteUser(id){
+            console.log('111111', id);
+            listUser.splice(id,1);
+            renderListUser();
+    }
+
+    function editUser(id11){
+            console.log("111111", id11);
+            let result= prompt("Bạn muốn đổi tên thành tên mới", listUser[id11]);
+            // listUser.splice(id11,1, result);       
+            listUser[id11]= result;   
+            renderListUser();
+    }
+
+
+        
+    </script>
+</body>
+</html>
